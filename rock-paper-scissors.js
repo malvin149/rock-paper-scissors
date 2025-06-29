@@ -21,3 +21,13 @@ const getComputerChoice = () => {
 }
 
 getComputerChoice();
+
+
+// Create a variable and store the input from the user into the variable
+
+const getHumanChoice = () => {
+    let humanChoice = prompt('Please choose between \'ROCK\', \'PAPER\', \'SCISSORS\'');
+    console.log(humanChoice);
+}
+
+getHumanChoice();
