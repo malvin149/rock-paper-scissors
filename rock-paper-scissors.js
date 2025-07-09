@@ -1,19 +1,19 @@
 // SET INITIAL SCORES TO 0
 let humanScore = 0;
 let computerScore = 0;
-const choices = ['rock', 'paper', 'scissors']; // Computer chooses from this array
+const choices = [ 'rock', 'paper', 'scissors' ]; // Computer chooses from this array
 
 // SELECT DOM ELEMENTS
-const gameButtons = document.querySelectorAll('.game-button');
-const displayDiv = document.querySelector('.display-results');
-const playerScoreDisplay = document.querySelector('#player-score');
-const computerScoreDisplay = document.querySelector('#computer-score');
+const gameButtons = document.querySelectorAll( '.game-button' );
+const displayDiv = document.querySelector( '.display-results' );
+const playerScoreDisplay = document.querySelector( '#player-score' );
+const computerScoreDisplay = document.querySelector( '#computer-score' );
 
 
 // COMPUTER CHOICE DETERMINED RANDOMLY
 const getComputerChoice = () => {
-    const computerChoice = Math.floor(Math.random()* choices.length);
-    return choices[computerChoice];
+    const computerChoice = Math.floor( Math.random() * choices.length );
+    return choices[ computerChoice ];
 };
 
 // DISABLE BUTTON FUNCTION 
@@ -65,3 +65,5 @@ gameButtons.forEach( button => {
     });
 });
 
+// SET INITIAL MESSAGE FOR USER TO KICKSTART THE GAME
+displayDiv.textContent = 'Choose your weapon to start the game!';
