@@ -1,7 +1,3 @@
-// console.log('Hello World');
-let computerScore = 0
-let humanScore = 0
-
 const getComputerChoice = () => {
     let computerChoice = Math.floor(Math.random() * 3);
 
@@ -19,7 +15,7 @@ const getHumanChoice = () => {
 const playRound = (humanChoice, computerChoice) => {
     humanChoice = humanChoice.toLowerCase().trim();
     if (humanChoice === computerChoice) {
-        return `It's a tie! You both chose${humanChoice}`
+        return `It's a tie! You both chose ${humanChoice}`;
     } else if 
         (
             (humanChoice === 'rock' && computerChoice === 'scissors') || 
@@ -27,15 +23,40 @@ const playRound = (humanChoice, computerChoice) => {
             (humanChoice === 'paper' && computerChoice === 'rock') 
         ) 
         {
-            humanScore++;
-            return `You win! ${humanChoice} beats ${computerChoice}`;
+            return `Congrats!!! ${humanChoice} beats ${computerChoice}`;
     } else {
-        computerScore++
-        return `You lose! ${computerChoice} beats ${humanChoice}`
+        return `You lose!!! ${computerChoice} beats ${humanChoice}`;
     }
 }
 
-const humanSelection = getHumanChoice();
-if (humanSelection !== null) {
-    console.log(playRound(humanSelection, getComputerChoice()));
+const playGame = () => {
+    let computerScore = 0
+    let humanScore = 0
+
+    for (let i = 0; i < 5; i++) {
+        let computerChoice = getComputerChoice();
+        let humanChoice;
+
+        do {
+            humanChoice = getHumanChoice();
+        } while (humanChoice === null);
+
+        
+        let result = playRound(humanChoice, computerChoice);
+        if (result.includes('Congrats')) humanScore++;
+        if (result.includes('lose')) computerScore++;
+        console.log(result);
+        
+    }
+
+
+    if (humanScore > computerScore) {
+        return `Human wins ${humanScore} - ${computerScore}`
+    } else if (humanScore === computerScore) {
+        return `It's a tie! ${humanScore} draw`
+    } else {
+        return `Computer wins ${computerScore} - ${humanScore}`
+    }
 }
+
+console.log(playGame());
