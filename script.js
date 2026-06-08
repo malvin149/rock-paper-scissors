@@ -1,26 +1,32 @@
+const labels = ['Rock', 'Paper', 'Scissors'];
+const container = document.querySelector('#container');
+const scoreCard = document.querySelector('#scoreCard');
+const humanScore = document.querySelector('#humanScore');
+const computerScore = document.querySelector('#computerScore');
+const btnContainer = document.querySelector('#btn-container');
+const roundResult = document.querySelector('#roundResult');
+const winner = document.querySelector('#winner');
+
+let hmScore = 0;
+let cpScore = 0;
+
 const getComputerChoice = () => {
     let computerChoice = Math.floor(Math.random() * 3);
 
-    if (computerChoice === 0) return 'rock';
-    if (computerChoice === 1) return 'paper';
-    if (computerChoice === 2) return 'scissors';
+    if (computerChoice === 0) return 'Rock';
+    if (computerChoice === 1) return 'Paper';
+    if (computerChoice === 2) return 'Scissors';
 };
 
-const getHumanChoice = () => {
-    const humanChoice = prompt('Please make a choice between [rock, paper, scissors]');
-    if (humanChoice === null || humanChoice === '') return null;
-    return humanChoice;
-}
-
 const playRound = (humanChoice, computerChoice) => {
-    humanChoice = humanChoice.toLowerCase().trim();
+    humanChoice = humanChoice;
     if (humanChoice === computerChoice) {
         return `It's a tie! You both chose ${humanChoice}`;
     } else if 
         (
-            (humanChoice === 'rock' && computerChoice === 'scissors') || 
-            (humanChoice === 'scissors' && computerChoice === 'paper') || 
-            (humanChoice === 'paper' && computerChoice === 'rock') 
+            (humanChoice === 'Rock' && computerChoice === 'Scissors') || 
+            (humanChoice === 'Scissors' && computerChoice === 'Paper') || 
+            (humanChoice === 'Paper' && computerChoice === 'Rock') 
         ) 
         {
             return `Congrats!!! ${humanChoice} beats ${computerChoice}`;
@@ -29,34 +35,29 @@ const playRound = (humanChoice, computerChoice) => {
     }
 }
 
-const playGame = () => {
-    let computerScore = 0
-    let humanScore = 0
+labels.forEach((label) => {
+    const buttons = document.createElement('button');
+    buttons.textContent = label;
+    buttons.id = label;
 
-    for (let i = 0; i < 5; i++) {
-        let computerChoice = getComputerChoice();
-        let humanChoice;
+    buttons.style.borderRadius = '8px';
+    buttons.style.border = '1px solid #eee';
 
-        do {
-            humanChoice = getHumanChoice();
-        } while (humanChoice === null);
+    btnContainer.appendChild(buttons);
+})
 
-        
-        let result = playRound(humanChoice, computerChoice);
-        if (result.includes('Congrats')) humanScore++;
-        if (result.includes('lose')) computerScore++;
-        console.log(result);
-        
-    }
+btnContainer.addEventListener('click', (e) => {
+    let humanChoice = e.target.id;
+    let computerChoice = getComputerChoice();
+    console.log(`Human Choice: ${humanChoice}`);
+    console.log(`Computer Choice: ${computerChoice}`);
+    let result = playRound(humanChoice, computerChoice);
+    roundResult.textContent = result;
+    if (result.includes('Congrats')) hmScore++;
+    if (result.includes('lose')) cpScore++;
 
-
-    if (humanScore > computerScore) {
-        return `Human wins ${humanScore} - ${computerScore}`
-    } else if (humanScore === computerScore) {
-        return `It's a tie! ${humanScore} draw`
-    } else {
-        return `Computer wins ${computerScore} - ${humanScore}`
-    }
-}
-
-console.log(playGame());
+    humanScore.textContent = `Human Choice: ${humanChoice}. Score: ${hmScore}`;
+    computerScore.textContent = `Computer Choice: ${computerChoice}. Score: ${cpScore}`;
+    
+    
+})
