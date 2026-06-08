@@ -46,11 +46,11 @@ labels.forEach((label) => {
     btnContainer.appendChild(buttons);
 })
 
+const allBtn = document.querySelectorAll('button');
+
 btnContainer.addEventListener('click', (e) => {
     let humanChoice = e.target.id;
     let computerChoice = getComputerChoice();
-    console.log(`Human Choice: ${humanChoice}`);
-    console.log(`Computer Choice: ${computerChoice}`);
     let result = playRound(humanChoice, computerChoice);
     roundResult.textContent = result;
     if (result.includes('Congrats')) hmScore++;
@@ -59,5 +59,9 @@ btnContainer.addEventListener('click', (e) => {
     humanScore.textContent = `Human Choice: ${humanChoice}. Score: ${hmScore}`;
     computerScore.textContent = `Computer Choice: ${computerChoice}. Score: ${cpScore}`;
     
-    
+    if (hmScore === 5 || cpScore === 5) {
+        winner.textContent = `Game Over. Winner is: ${hmScore === 5 ? 'Human' : 'Computer'}`;
+        allBtn.forEach(btn => btn.disabled = true);
+    }
+
 })
