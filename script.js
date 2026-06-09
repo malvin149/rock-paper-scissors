@@ -1,6 +1,5 @@
 const labels = ['Rock', 'Paper', 'Scissors'];
 const container = document.querySelector('#container');
-const scoreCard = document.querySelector('#scoreCard');
 const humanScore = document.querySelector('#humanScore');
 const computerScore = document.querySelector('#computerScore');
 const btnContainer = document.querySelector('#btn-container');
@@ -40,8 +39,6 @@ labels.forEach((label) => {
     buttons.textContent = label;
     buttons.id = label;
 
-    buttons.style.borderRadius = '8px';
-    buttons.style.border = '1px solid #eee';
 
     btnContainer.appendChild(buttons);
 })
@@ -61,10 +58,12 @@ btnContainer.addEventListener('click', (e) => {
     
     if (hmScore === 5 || cpScore === 5) {
         winner.textContent = `Game Over. Winner is: ${hmScore === 5 ? 'Human' : 'Computer'}`;
+        winner.style.color = hmScore === 5 ? '#00ff88' : '#ff4444';
             winner.textContent;
             allBtn.forEach(btn => btn.disabled = true);
             const resetBtn = document.createElement('button');
-            resetBtn.textContent = 'Replay'
+            resetBtn.textContent = 'Replay';
+            resetBtn.id = 'replayBtn';
             resetBtn.addEventListener('click', () =>{
                 hmScore = 0;
                 cpScore = 0;

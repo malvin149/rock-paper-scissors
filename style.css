@@ -67,3 +67,20 @@ body {
     font-weight: 700;
     color: #0f8;
 }
+
+#replayBtn {
+    background-color: #0f8;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.15s ease;
+}
+
+#replayBtn:hover {
+    transform: translateY(-4px);
+}
