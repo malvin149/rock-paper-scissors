@@ -56,12 +56,27 @@ btnContainer.addEventListener('click', (e) => {
     if (result.includes('Congrats')) hmScore++;
     if (result.includes('lose')) cpScore++;
 
-    humanScore.textContent = `Human Choice: ${humanChoice}. Score: ${hmScore}`;
-    computerScore.textContent = `Computer Choice: ${computerChoice}. Score: ${cpScore}`;
+    humanScore.textContent = `You: ${hmScore}`;
+    computerScore.textContent = `Computer: ${cpScore}`;
     
     if (hmScore === 5 || cpScore === 5) {
         winner.textContent = `Game Over. Winner is: ${hmScore === 5 ? 'Human' : 'Computer'}`;
-        allBtn.forEach(btn => btn.disabled = true);
+            winner.textContent;
+            allBtn.forEach(btn => btn.disabled = true);
+            const resetBtn = document.createElement('button');
+            resetBtn.textContent = 'Replay'
+            resetBtn.addEventListener('click', () =>{
+                hmScore = 0;
+                cpScore = 0;
+                winner.textContent = '';
+                roundResult.textContent = '';
+                humanScore.textContent = '';
+                computerScore.textContent = '';
+                allBtn.forEach(btn => btn.disabled = false);
+                resetBtn.style.display = 'none';
+            });    
+            container.appendChild(resetBtn);
+
     }
 
 })
